@@ -271,6 +271,13 @@ class OpenApiGeneratorTest extends kyo.BaseHttpTest:
                 assert(obj.description == Some("a flag"))
             }
 
+            "Null: description is forwarded" in {
+                val js  = Json.JsonSchema.Null(description = Present("always null"))
+                val obj = OpenApiGenerator.jsonSchemaToHttpOpenApi(js)
+                assert(obj.`type` == Some("null"))
+                assert(obj.description == Some("always null"))
+            }
+
             "constraint fields are absent from JSON when empty" in {
                 val js  = Json.JsonSchema.Str()
                 val obj = OpenApiGenerator.jsonSchemaToHttpOpenApi(js)

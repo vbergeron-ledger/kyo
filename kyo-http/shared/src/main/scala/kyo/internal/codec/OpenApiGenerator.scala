@@ -335,7 +335,7 @@ private[kyo] object OpenApiGenerator:
                     description = description.toOption
                 )
 
-            case JsonSchema.Null(_) =>
+            case JsonSchema.Null(description) =>
                 HttpOpenApi.SchemaObject(
                     `type` = Some("null"),
                     format = None,
@@ -345,7 +345,8 @@ private[kyo] object OpenApiGenerator:
                     additionalProperties = None,
                     oneOf = None,
                     `enum` = None,
-                    `$ref` = None
+                    `$ref` = None,
+                    description = description.toOption
                 )
 
             case JsonSchema.Nullable(inner) =>
